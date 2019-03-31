@@ -1,5 +1,7 @@
 {
   "name": "geosearch",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

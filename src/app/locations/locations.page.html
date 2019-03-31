@@ -18,7 +18,8 @@
       <ion-item-options side="start">
         <ion-item-option (click)="saveToHistory(item)">Salvar</ion-item-option>
       </ion-item-options>
-      <ion-item [routerLink]="['/','location', item.geonameId]">
+      <!--ion-item [routerLink]="['/','location', item.geonameId]"-->
+      <ion-item (click)="saveAndGo(item)">
         <ion-icon slot="start" name="hand"></ion-icon>
         <ion-label text-wrap>
             <h3>{{item.name}}</h3>
