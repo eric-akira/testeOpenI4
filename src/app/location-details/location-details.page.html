@@ -1,9 +1,64 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>locationDetails</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+      <span *ngIf="details">Detalhes de {{details.name}}</span>
+      <span *ngIf="!details">Carregando informações... <ion-spinner></ion-spinner></span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card *ngIf="details">
+    <ion-card-header>
+      <ion-card-subtitle>{{details.countryName}}</ion-card-subtitle>
+      <ion-card-title>{{details.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-item *ngIf="details.countryName">
+      <ion-icon slot="start" name="map"></ion-icon>
+      <ion-label text-wrap>
+        País:
+        <h3>{{details.countryName}}</h3>
+      </ion-label>
+    </ion-item>
 
+    <ion-item *ngIf="details.timezone">
+      <ion-icon slot="start" name="time"></ion-icon>
+      <ion-label text-wrap>
+        Fuso horário:
+        <h3>{{details.timezone.timeZoneId}}</h3>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="details.population && details.population > 0">
+      <ion-icon slot="start" name="people"></ion-icon>
+      <ion-label text-wrap>
+        População:
+        <h3>{{details.population}}</h3>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="details.lat">
+      <ion-icon slot="start" name="pin"></ion-icon>
+      <ion-label text-wrap>
+        Latitude:
+        <h3>{{details.lat}}</h3>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="details.lng">
+      <ion-icon slot="start" name="pin"></ion-icon>
+      <ion-label text-wrap>
+        Longitude:
+        <h3>{{details.lng}}</h3>
+      </ion-label>
+    </ion-item>
+
+    <ion-button expand="full" *ngIf="details.wikipediaURL" (click)="openWiki()">
+        <ion-icon slot="start" name="open"></ion-icon>
+        Abrir Wikipedia
+    </ion-button>
+  </ion-card>
 </ion-content>

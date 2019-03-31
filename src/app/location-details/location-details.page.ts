@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../location.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-location-details',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./location-details.page.scss'],
 })
 export class LocationDetailsPage implements OnInit {
+  details = null;
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private locationService: LocationService) { }
 
   ngOnInit() {
+    let geonameId = this.activatedRoute.snapshot.paramMap.get('id');
+
+    this.locationService.getLocationDetails(geonameId).subscribe(result => {
+      this.details = result;
+    });
   }
 
+  openWiki() {
+    window.open('https://' + this.details.wikipediaURL, '_blank');
+  }
 }
